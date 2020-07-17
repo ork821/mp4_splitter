@@ -2,6 +2,8 @@ use std::fs;
 use byte_buffer::Buffer;
 mod mp4_parser;
 use mp4_parser::Parser;
+mod trak;
+use trak::Trak;
 
 fn main() {
     println!("Hello, world!");
@@ -47,7 +49,8 @@ fn parse_moov(data : Vec<u8>, parser : &mut Parser) {
         match name.as_str() {
             "mvhd" => parser.set_mvhd(data),
             "trak" => {
-
+                let trak = Trak::new(data);
+                parser.add_trak(trak);
             }
             _ => ()
         }

@@ -1,8 +1,10 @@
+use crate::trak::Trak;
+
 #[derive(Debug)]
 pub struct Parser {
     ftyp : Vec<u8>,
     mvhd : Vec<u8>,
-    traks : Vec<u8>
+    traks : Vec<Trak>
 }
 
 impl Parser {
@@ -28,5 +30,9 @@ impl Parser {
 
     pub fn get_mvhd(&self) -> Vec<u8> {
         self.mvhd.to_vec()
+    }
+
+    pub fn add_trak(&mut self, trak : Trak) {
+        self.traks.push(trak);
     }
 }
